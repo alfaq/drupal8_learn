@@ -1,0 +1,8 @@
+<?php
+function hello_world_theme($existing, $type, $theme, $path) {
+  return [
+    'hello_world' => [
+      'variables' => ['test_var' => NULL],
+    ],
+  ];
+}

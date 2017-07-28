@@ -40,6 +40,10 @@ class HelloWorldController extends ControllerBase {
     $output['#title'] = 'HelloWorld page title';
     $output['#markup'] = 'Hello World!';
 
+    return [
+      '#theme' => 'hello_world',
+      '#test_var' => $this->t('Test Value'),
+    ];
     return $output;
   }
 
