@@ -12,7 +12,6 @@ use Drupal\Core\Block\BlockBase;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
-use Drupal\Core\Asset;
 
 
 /**
@@ -36,6 +35,8 @@ class TestBlock extends BlockBase{
     return array(
       'count' => 5,
       'message' => 'Hello World!',
+      'test_checkbox' => TRUE,
+      'photo' => FALSE,
     );
   }
 
@@ -49,27 +50,39 @@ class TestBlock extends BlockBase{
     $form = parent::blockForm($form, $form_state);
     // Получаем конфиги для данного блока.
     $config = $this->getConfiguration();
+    dpm($config);
 
-    //dpm($config);
+    //kint($config);
 
 
 
     // Добавляем поле для ввода сообщения.
     $form['message'] = array(
       '#type' => 'textfield',
-      '#title' => t('Message to printing'),
+      '#title' => $this->t('Message to printing'),
       '#default_value' => $config['message'],
     );
 
     // Добавляем поле для количества сообщений.
-    $form['count'] = array(
+    $form['count'] = [
       '#type' => 'number',
       '#min' => 1,
-      '#title' => t('How many times display a message'),
+      '#title' => $this->t('How many times display a message'),
       '#default_value' => $config['count'],
-    );
+    ];
 
+    $form['test_checkbox'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Checkbox title'),
+      '#default_value' => $config['test_checkbox'],
+    ];
 
+    $form['test_checkboxes'] = [
+      '#type' => 'checkboxes',
+      '#title' => $this->t('Checkboxes title'),
+      '#options' => [1 => 'one', 'two' => 'two', 3 => 'three'],
+      '#default_value' => $config['test_checkboxes'],
+    ];
 
 
     $form['photo'] = [
@@ -114,6 +127,8 @@ class TestBlock extends BlockBase{
   public function blockSubmit($form, FormStateInterface $form_state) {
     $this->configuration['count'] = $form_state->getValue('count');
     $this->configuration['message'] = $form_state->getValue('message');
+    $this->configuration['test_checkbox'] = $form_state->getValue('test_checkbox');
+    $this->configuration['test_checkboxes'] = $form_state->getValue('test_checkboxes');
 
     $photo = $form_state->getValue('photo');
     $this->configuration['photo'] = $photo;
