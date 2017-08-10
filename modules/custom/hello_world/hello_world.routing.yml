@@ -12,3 +12,14 @@ hello_world.hellopage:
     # Мы будем показывать страницу только тем, у кого есть права на просмотр
     # содержимого.
     _permission: 'view content'
+
+
+
+collect_phone.form:
+  path: '/collect-phone'
+  defaults:
+    _title: 'Collect Phone - Form API example.'
+    # Подгружаем форму по неймспейсу.
+    _form: '\Drupal\hello_world\Form\CollectPhone'
+  requirements:
+    _permission: 'access content'
