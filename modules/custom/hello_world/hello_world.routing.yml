@@ -11,7 +11,7 @@ hello_world.hellopage:
   requirements:
     # Мы будем показывать страницу только тем, у кого есть права на просмотр
     # содержимого.
-    _permission: 'view content'
+    _permission: 'access content'
 
 
 

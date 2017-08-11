@@ -40,11 +40,16 @@ class HelloWorldController extends ControllerBase {
     $output['#title'] = 'HelloWorld page title';
     $output['#markup'] = 'Hello World!';
 
+
+    $form_class = '\Drupal\hello_world\Form\CollectPhone';
+    $form = \Drupal::formBuilder()->getForm($form_class);
+    //dpm($output['#markup']);
+
     return [
       '#theme' => 'hello_world',
-      '#test_var' => $this->t('Test Value'),
+      '#test_var' => $form,
     ];
-    return $output;
+    //return $output;
   }
 
 }
